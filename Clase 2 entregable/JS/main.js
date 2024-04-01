@@ -19,7 +19,7 @@ class ProductManager {
                 stock: stock
             })
         } else {
-            console.log(`ERROR: El code ${code} ya ha sido utilizado en otro producto`)
+            console.log(`ERROR: El code "${code}" ya ha sido utilizado en otro producto`)
         }
     }
     getProducts() {
@@ -31,7 +31,7 @@ class ProductManager {
         if (item) {
             console.log(item)
         } else {
-            console.log(`ERROR: Not found: ${code}`)
+            console.log(`ERROR: Not found: "${code}"`)
         }
     }
 }
