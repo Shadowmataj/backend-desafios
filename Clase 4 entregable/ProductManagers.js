@@ -117,5 +117,17 @@ class ProductManager {
 
 const productManager1 = new ProductManager() // Se genera el product manager 
 
+console.log(productManager1.getProducts()) 
 
+productManager1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25)
 console.log(productManager1.getProducts())
+
+productManager1.getProductbyId("abc123")
+
+productManager1.updateProduct(1, "title", "Producto actualizado")
+console.log(productManager1.getProducts()) 
+
+
+productManager1.deleteProduct(1)
+console.log(productManager1.getProducts()) 
+
