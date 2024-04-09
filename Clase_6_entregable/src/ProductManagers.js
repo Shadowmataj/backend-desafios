@@ -1,5 +1,4 @@
-const fs = require("fs")
-const { stringify } = require("querystring")
+import fs from "fs"
 
 if(!fs.existsSync("./src/products_list.json")){
     fs.writeFileSync("./src/products_list.json", JSON.stringify([]))
@@ -9,7 +8,7 @@ class ProductManager {
     constructor() {
         this.path = "./src/products_list.json"
         this.products = JSON.parse(fs.readFileSync(this.path))
-        this.id = Math.max(this.products.map(item => item.id))
+        this.id = Math.max(...this.products.map(item => item.id))
     }
 
     addProduct(title, description, price, thumbnail, code, stock) {
@@ -116,22 +115,6 @@ class ProductManager {
 
 
 const productManager1 = new ProductManager() // Se genera el product manager 
-
-console.log(productManager1.getProducts()) 
-
-productManager1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc123", 25)
-productManager1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc124", 25)
-productManager1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc125", 25)
-productManager1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc126", 25)
-productManager1.addProduct("producto prueba", "Este es un producto prueba", 200, "Sin imagen", "abc127", 25)
-
-console.log(productManager1.getProducts())
-
-productManager1.getProductbyId("abc123")
-
-productManager1.updateProduct(1, "title", "Producto actualizado")
-console.log(productManager1.getProducts()) 
-
 
 console.log(productManager1.getProducts()) 
 
