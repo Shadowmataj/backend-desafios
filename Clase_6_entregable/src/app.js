@@ -8,24 +8,24 @@ app.use(express.urlencoded({ extended: true }))
 
 app.get("/products", async (req, res) => {
     let limitproducts = req.query.limit
-    const product_list = await JSON.parse(fs.readFileSync("./src/product_list.json"))
-    const filtered_list = []
+    const productList = await JSON.parse(fs.readFileSync("./src/productList.json"))
+    const filteredList = []
 
-    if (!limitproducts) return res.send({ product_list })
+    if (!limitproducts) return res.send({ productList })
 
     for (let i = 0; i < limitproducts; i++) {
-        if (product_list[i]) {
-            filtered_list.push(product_list[i])
+        if (productList[i]) {
+            filteredList.push(productList[i])
         }
     }
-    res.send({ filtered_list })
+    res.send({ filteredList })
 })
 
 
 app.get("/products/:pid", async (req, res) => {
 
-    const product_list = await JSON.parse(fs.readFileSync("./src/product_list.json"))
-    const product = product_list.find(item => item.id == req.params.pid)
+    const productList = await JSON.parse(fs.readFileSync("./src/productList.json"))
+    const product = productList.find(item => item.id == req.params.pid)
     if (!product) return res.send({ Error: `ID no encontrado: ${req.params.pid}` })
     res.send({ product })
 })
