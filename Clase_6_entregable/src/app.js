@@ -11,14 +11,14 @@ app.get("/products", async (req, res) => {
     const productsList = await JSON.parse(fs.readFileSync("./src/products_list.json"))
     const filteredList = []
 
-    if (!limitproducts) return res.send({ status: 1, payload: productsList })
+    if (!limitproducts) return res.send({ productsList })
 
     for (let i = 0; i < limitproducts; i++) {
         if (productsList[i]) {
             filteredList.push(productsList[i])
         }
     }
-    res.send({ status: 1, payload: filteredList })
+    res.send({ filteredList })
 })
 
 // endpoint con parámetro para obtener produto por id
@@ -27,7 +27,7 @@ app.get("/products/:pid", async (req, res) => {
     const productList = await JSON.parse(fs.readFileSync("./src/products_list.json"))
     const product = productList.find(item => item.id == req.params.pid)
     if (!product) return res.send({ Error: `ID no encontrado: ${req.params.pid}` })
-    res.send({ status: 1, payload: product })
+    res.send({ product })
 })
 
 app.listen(8080, () => console.log("Servidor arriba en el puerto 8080"))
