@@ -6,9 +6,9 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 
 // Endpoint con parámetro y query para obtener array completo o limitar la cantidad de productos
-app.get("/products", async (req, res) => {
+app.get("/products", (req, res) => {
     let limitproducts = req.query.limit
-    const productsList = await JSON.parse(fs.readFileSync("./src/products_list.json"))
+    const productsList = JSON.parse(fs.readFileSync("./src/products_list.json"))
     const filteredList = []
 
     if (!limitproducts) return res.send({ payload: productsList })
@@ -22,9 +22,9 @@ app.get("/products", async (req, res) => {
 })
 
 // endpoint con parámetro para obtener produto por id
-app.get("/products/:pid", async (req, res) => {
+app.get("/products/:pid", (req, res) => {
 
-    const productList = await JSON.parse(fs.readFileSync("./src/products_list.json"))
+    const productList = JSON.parse(fs.readFileSync("./src/products_list.json"))
     const product = productList.find(item => item.id == req.params.pid)
     if (!product) return res.send({ Error: `ID no encontrado: ${req.params.pid}` })
     res.send({ payload: product })
