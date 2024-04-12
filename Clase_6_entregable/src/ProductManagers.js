@@ -11,7 +11,7 @@ class ProductManager {
         this.id = Math.max(...this.products.map(item => item.id))
     }
 
-    addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(title, description, price, thumbnail, code, stock) {
 
         const codeVerification = this.products.some(item => item.code == code)
 
@@ -25,7 +25,7 @@ class ProductManager {
                 code: code,
                 stock: stock
             })
-            fs.writeFileSync(this.path, JSON.stringify(this.products))
+            await fs.promises.writeFile(this.path, JSON.stringify(this.products))
         } else {
             console.log(`ERROR: El code "${code}" ya ha sido utilizado en otro producto`)
         }
@@ -45,19 +45,19 @@ class ProductManager {
         }
     }
 
-    deleteProduct(id){
+    async deleteProduct(id){
 
         const condicion = this.products.some((item => item.id == id))
         if (condicion){
             this.products = this.products.filter(resp => resp.id !== id)
-            fs.writeFileSync(this.path, JSON.stringify(this.products))
+            await fs.promises.writeFile(this.path, JSON.stringify(this.products))
         } else {
             console.log(`ERROR: ID Not found: "${id}"`)
         }
     
     }
 
-    updateProduct(id, property = "", change = ""){
+    async updateProduct(id, property = "", change = ""){
         const condicion = this.products.some((item => item.id === id))
         
 
@@ -104,7 +104,7 @@ class ProductManager {
 
             this.products.splice(index, 1, item)
 
-            fs.writeFileSync(this.path, JSON.stringify(this.products))
+            await fs.promises.writeFile(this.path, JSON.stringify(this.products))
 
         } else {
             console.log(`ERROR: ID Not found: "${id}"`)
