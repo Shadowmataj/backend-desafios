@@ -4,7 +4,7 @@ if(!fs.existsSync("./src/products_list.json")){
     fs.writeFileSync("./src/products_list.json", JSON.stringify([]))
 }
 
-class ProductManager {
+export class ProductManager {
     constructor() {
         this.path = "./src/products_list.json"
         this.products = JSON.parse(fs.readFileSync(this.path))
@@ -114,7 +114,7 @@ class ProductManager {
 }
 
 
-const productManager1 = new ProductManager() // Se genera el product manager 
+// const productManager1 = new ProductManager() // Se genera el product manager 
 
-console.log(productManager1.getProducts()) 
+// console.log(productManager1.getProducts()) 
 
