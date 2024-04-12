@@ -1,5 +1,4 @@
 import express from "express"
-import fs from "fs"
 import { ProductManager } from "./ProductManagers.js"
 
 const app = express()
